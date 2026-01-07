@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V37.4 – A Special Surprise</title>
+
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --bg1:#0f1224;
+  --bg2:#161a3a;
+  --glass:rgba(255,255,255,.08);
+  --text-soft:rgba(255,255,255,.88);
+}
+
+/* BODY */
+body{
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;
+  color:#fff;
+  background:
+    radial-gradient(circle at top,var(--bg2),var(--bg1) 70%);
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* PNG OVERLAY */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("bg.jpg") center/cover no-repeat;
+  opacity:.35;
+  pointer-events:none;
+  z-index:-1;
+}
+
+/* CONTAINER */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 22px;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.3rem,4.5vw,3rem);
+  font-weight:600;
+  max-width:840px;
+  line-height:1.25;
+}
+
+/* MAHADEV LINE */
+.bless{
+  text-align:center;
+  margin-top:20px;
+  font-size:1rem;
+  letter-spacing:.5px;
+  opacity:.85;
+}
+
+/* CARD */
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(16px);
+  border-radius:30px;
+  padding:50px;
+  margin:100px 0 80px;
+  box-shadow:0 35px 90px rgba(0,0,0,.55);
+}
+
+.card p{
+  font-family:'Playfair Display',serif;
+  font-size:1.15rem;
+  line-height:1.95;
+  color:var(--text-soft);
+}
+
+/* ACTION BUTTONS */
+.action{
+  text-align:center;
+  margin:60px 0 90px;
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:14px 38px;
+  border-radius:999px;
+  border:none;
+  background:#fff;
+  color:#000;
+  font-weight:500;
+  font-size:1rem;
+  cursor:pointer;
+  box-shadow:0 20px 50px rgba(0,0,0,.4);
+  transition:.3s;
+}
+
+.btn.secondary{
+  background:rgba(255,255,255,.15);
+  color:#fff;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+/* PHOTOS */
+.photos{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+  margin-bottom:110px;
+}
+
+.photos img{
+  width:100%;
+  aspect-ratio:812 / 812;   /* PHOTO SHAPE */
+  object-fit:cover;
+  border-radius:26px;
+  box-shadow:0 25px 65px rgba(0,0,0,.65);
+  opacity:0;
+  transform:translateY(40px) scale(.97);
+  transition:.8s ease;
+}
+
+.photos img.show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* VIDEO OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+}
+
+.overlay video{
+  width:min(90%,420px);
+  border-radius:20px;
+}
+
+/* FOOTER */
+.footer{
+  text-align:center;
+  padding:60px 10px 70px;
+  font-size:.85rem;
+  opacity:.65;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .photos{
+    grid-template-columns:1fr;
+  }
+  .card{
+    padding:38px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <h1>
+        Some people don’t just pass through life —<br>
+        they quietly make it better just by being there.
+      </h1>
+      <div class="bless">🕉️ Mahadev Bless You Divya</div>
+    </div>
+  </section>
+
+  <!-- WISHES -->
+  <section class="card">
+    <p>
+      Today is not just about celebrating a birthday —  
+      it’s about celebrating <strong>you</strong>.<br><br>
+
+      The calm you bring into chaos,  
+      the smiles you give without trying,  
+      and the strength you carry so naturally.<br><br>
+
+      May this year bring you peace of mind,  
+      genuine happiness, and moments that remind you  
+      how deeply you are valued.
+    </p>
+  </section>
+
+  <!-- ACTION BUTTONS -->
+  <section class="action">
+    <button class="btn" onclick="openVideo()">🎁 Surprise For You</button>
+    <button class="btn secondary" onclick="toggleMusic()" id="musicBtn">
+      Enjoy 
+    </button>
+  </section>
+
+  <!-- PHOTOS -->
+  <section class="photos">
+    <img src="photo1.jpg" alt="">
+    <img src="photo2.jpg" alt="">
+    <img src="photo3.jpg" alt="">
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Created by <strong>Shashi</strong>
+  </div>
+
+</div>
+
+<!-- VIDEO -->
+<div class="overlay" id="overlay" onclick="closeVideo()">
+  <video id="video" controls>
+    <source src="video1.mp4" type="video/mp4">
+  </video>
+</div>
+
+<!-- MUSIC -->
+<audio id="No song" src="song.mp3"/audio>
+
+<script>
+/* PHOTO REVEAL */
+const photos=document.querySelectorAll(".photos img");
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add("show");
+    }
+  });
+},{threshold:.25});
+photos.forEach(p=>observer.observe(p));
+
+/* VIDEO */
+const overlay=document.getElementById("overlay");
+const video=document.getElementById("video");
+
+function openVideo(){
+  overlay.style.display="flex";
+  video.play();
+}
+function closeVideo(){
+  video.pause();
+  video.currentTime=0;
+  overlay.style.display="none";
+}
+
+/* MUSIC */
+const music=document.getElementById("music");
+const musicBtn=document.getElementById("musicBtn");
+let playing=false;
+
+function toggleMusic(){
+  if(!playing){
+    music.play();
+    musicBtn.innerText="⏸ Pause Song";
+  }else{
+    music.pause();
+    musicBtn.innerText="🎵 Play Song";
+  }
+  playing=!playing;
+}
+</script>
+
+</body>
+</html>
